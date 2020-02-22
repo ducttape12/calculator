@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Alert from 'react-bootstrap/Alert';
 
 export default class Display extends React.Component {
 
@@ -18,7 +19,7 @@ export default class Display extends React.Component {
     }
 
     render() {
-        return <h1>{this.generateDisplay()}</h1>;
+        return <Alert variant="info" className="text-right"><h1>{this.generateDisplay()}</h1></Alert>;
     }
 }
 

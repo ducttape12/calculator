@@ -1,6 +1,11 @@
 import React from 'react';
 import CalculatorButton from './CalculatorButton';
 import Display from './Display';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import './Calculator.css';
 
 export default class Calculator extends React.Component {
 
@@ -65,9 +70,12 @@ export default class Calculator extends React.Component {
             case this.operations.SUBTRACTION:
                 current = this.state.total - current;
                 break;
+
+            default:
+                return;
         }
 
-        if(operation === this.operations.EQUALS) {
+        if (operation === this.operations.EQUALS) {
             nextOperation = this.state.operation;
         }
 
@@ -97,54 +105,52 @@ export default class Calculator extends React.Component {
     }
 
     render() {
-
-        let operation;
-        switch (this.state.operation) {
-            case this.operations.ADDITION:
-                operation = '+';
-                break;
-            case this.operations.DIVISION:
-                operation = '/';
-                break;
-            case this.operations.MULTIPLICATION:
-                operation = '*';
-                break;
-            case this.operations.SUBTRACTION:
-                operation = '-';
-                break;
-            case this.operations.EQUALS:
-                operation = '=';
-                break;
-        }
-
         return (
-            <div>
-                <p>previous: {this.state.previous}</p>
-                <p>total: {this.state.total}</p>
-                <p>current: {this.state.current}</p>
-                <p>operation: {operation}</p>
-                <p>waitingForInput: {this.state.waitingForInput}</p>
-                <Display value={this.state.current}></Display>
-                <br />
-                <CalculatorButton display="0" value="0" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="1" value="1" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="2" value="2" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="3" value="3" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="4" value="4" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="5" value="5" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="6" value="6" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="7" value="7" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="8" value="8" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="9" value="9" onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="." value="." onClick={this.buttonClicked} /><br />
-                <CalculatorButton display="+" value={this.operations.ADDITION} onClick={this.operationClicked} /><br />
-                <CalculatorButton display="-" value={this.operations.SUBTRACTION} onClick={this.operationClicked} /><br />
-                <CalculatorButton display="/" value={this.operations.DIVISION} onClick={this.operationClicked} /><br />
-                <CalculatorButton display="*" value={this.operations.MULTIPLICATION} onClick={this.operationClicked} /><br />
-                <CalculatorButton display="=" value={this.operations.EQUALS} onClick={this.operationClicked} /><br />
-                <CalculatorButton display="AC" value="AC" onClick={this.allClear} /><br />
-                <CalculatorButton display="C" value="C" onClick={this.clear} /><br />
-            </div>
+            <Container>
+                <Row className="d-flex justify-content-center">
+                    <Col xs={12} md={6}>
+                        <Card bg="primary">
+                            <Card.Header>
+                                <Row>
+                                    <Col xs={12}>
+                                        <Display value={this.state.current}></Display>
+                                    </Col>
+                                </Row></Card.Header>
+                            <Card.Body>
+                                <Row>
+                                    <Col xs={3}><CalculatorButton display="AC" value="AC" variant="danger" onClick={this.allClear} /></Col>
+                                    <Col xs={3}><CalculatorButton display="C" value="C" variant="danger" onClick={this.clear} /></Col>
+                                    <Col xs={3}></Col>
+                                    <Col xs={3}><CalculatorButton display="&#247;" value={this.operations.DIVISION} variant="secondary" onClick={this.operationClicked} /></Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={3}><CalculatorButton display="7" value="7" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="8" value="8" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="9" value="9" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="&#215;" value={this.operations.MULTIPLICATION} variant="secondary" onClick={this.operationClicked} /></Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={3}><CalculatorButton display="4" value="4" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="5" value="5" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="6" value="6" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="-" value={this.operations.SUBTRACTION} variant="secondary" onClick={this.operationClicked} /></Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={3}><CalculatorButton display="1" value="1" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="2" value="2" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="3" value="3" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="+" value={this.operations.ADDITION} variant="secondary" onClick={this.operationClicked} /></Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={6}><CalculatorButton display="0" value="0" variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="." value="." variant="secondary" onClick={this.buttonClicked} /></Col>
+                                    <Col xs={3}><CalculatorButton display="=" value={this.operations.EQUALS} variant="secondary" onClick={this.operationClicked} /></Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }
