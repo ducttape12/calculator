@@ -11,7 +11,7 @@ export default class Display extends React.Component {
     }
 
     generateDisplay() {
-        if(this.props.value === '') {
+        if(this.props.value === undefined || this.props.value === null || this.props.value === '') {
             return '0';
         } else {
             return this.props.value;

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Calculator from './Calculator';
+import Calculator from './Calculator/Calculator';
 import * as serviceWorker from './serviceWorker';
 import './sketchy.css';
 import './index.css';
